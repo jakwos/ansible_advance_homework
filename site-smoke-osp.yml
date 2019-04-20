@@ -1,5 +1,6 @@
 - hosts: workstation
   gather_facts: false
+
   tasks:
   - name: OpenStack servers
     os_server_facts:
@@ -8,7 +9,18 @@
     register: openstack_info
     tags:
       - osp.smoke
+
+  - name: Show frontend public IP 
+    debug:
+      msg: "Frontend server public IP addres is: {{ openstack_info.ansible_facts.openstack_servers[0].public_v4 }}"
+ 
   - name: Curl website
+    uri:
+      url: http://{{ openstack_info.ansible_facts.openstack_servers[0].public_v4 }}
+      return_content: yes
+    register: webpage
+    tags:
+      - osp.smoke
 
   - name: Fail if 'Ansible has done its job' is not in the page content
     fail:
