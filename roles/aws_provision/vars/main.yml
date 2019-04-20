@@ -1,0 +1,5 @@
+---
+# vars file for aws_provision
+OPENTLC_user: jakub.wosko-atos.net
+OPENTLC_password: Atos,591234
+workstation_IP: 192.168.0.5
