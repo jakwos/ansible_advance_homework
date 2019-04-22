@@ -1,5 +1,5 @@
 - name: Ping to workstation
-  hosts: workstation 
+  hosts: all 
   gather_facts: no
   tasks:
     - name: Ping host
