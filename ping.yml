@@ -1,0 +1,6 @@
+- name: Ping to workstation
+  hosts: workstation 
+  gather_facts: no
+  tasks:
+    - name: Ping host
+      ping:
