@@ -13,12 +13,13 @@
   - name: Show frontend public IP 
     debug:
       msg: "Frontend server public IP addres is: {{ openstack_info.ansible_facts.openstack_servers[0].public_v4 }}"
- 
+
   - name: Curl website
     uri:
       url: http://{{ openstack_info.ansible_facts.openstack_servers[0].public_v4 }}
       return_content: yes
     register: webpage
+    ignore_errors: yes
     tags:
       - osp.smoke
 
