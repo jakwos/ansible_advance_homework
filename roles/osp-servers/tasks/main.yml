@@ -14,9 +14,10 @@
         deployment_name: "{{ item.value.meta.0.deployment_name }}"
         group: "{{ item.value.meta.0.group }}"
       userdata: |
-        !/bin/bash
         curl -o /tmp/openstack.pub http://www.opentlc.com/download/ansible_bootcamp/openstack_keys/openstack.pub
         cat /tmp/openstack.pub >> /home/cloud-user/.ssh/authorized_keys
+        chmod 600 /home/cloud-user/.ssh/authorized_keys
+        chown cloud-user:cloud-user /home/cloud-user/.ssh/authorized_keys
         curl -o /tmp/internal.repo http://www.opentlc.com/download/ansible_bootcamp/repo/internal.repo
         cp /tmp/internal.repo /etc/yum.repos.d/internal.repo
   with_dict: "{{ osp_servers }}"
