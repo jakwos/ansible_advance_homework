@@ -1,6 +1,14 @@
 - hosts: tag_AnsibleGroup_bastions
   gather_facts: true
   become: true
+  vars:
+    tower_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          35356362363961363938616637393737313062306162316531333064646533373130366133623832
+          3139343038313464373861303635326433383262376539310a353735613933366565623566393138
+          35643963643636316661636433393639663930376133303737356630326338333035313337316537
+          6533353062343666340a373166626639633430653530393238633538313961313565346261373362
+          3137
 
   tasks:
   - name: Install required packages 
@@ -30,7 +38,7 @@
       kind: ssh
       tower_host: tower1.{{tower_guid}}.example.opentlc.com
       tower_username: admin
-      tower_password: r3dh4t1!
+      tower_password: "{{ tower_password }}"
       tower_verify_ssl: no
       ssh_key_data: "/root/.ssh/{{ file_to_copy.stdout }}"
       username: ec2-user
@@ -41,7 +49,7 @@
       machine_credential: "Creds for AWS instances"
       tower_host: tower1.{{tower_guid}}.example.opentlc.com
       tower_username: admin
-      tower_password: r3dh4t1!
+      tower_password: "{{ tower_password }}"
       tower_verify_ssl: no
       state: present
       job_type: run
@@ -54,7 +62,7 @@
       machine_credential: "Creds for AWS instances"
       tower_host: tower1.{{tower_guid}}.example.opentlc.com
       tower_username: admin
-      tower_password: r3dh4t1!
+      tower_password: "{{ tower_password }}"
       tower_verify_ssl: no
       state: present
       job_type: run
