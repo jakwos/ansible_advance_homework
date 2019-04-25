@@ -17,9 +17,9 @@
     debug:
       var: item
     with_items:
-        - webpage
-        - webpage1
+        - "{{ webpage }}"
+        - "{{ webpage1 }}"
 
   - name: Fail if 'Ansible has done its job' is not in the page content
     fail:
-    when: "'Ansible has done its job' not in webpage.results[0].content"
+    when: "'Ansible has done its job' not in webpage.content"
