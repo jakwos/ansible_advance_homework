@@ -5,12 +5,19 @@
   - name: Use Uri module for wrting smoke test.
     uri:    
       url: "http://frontend1.{{ ANSIBLE_ADVANCE_GUID }}.example.opentlc.com"
+      return_content: yes
     register: webpage
     ignore_errors: yes
 
+  - name: Curl website
+    command: curl "http://frontend1.{{ ANSIBLE_ADVANCE_GUID }}.example.opentlc.com"
+    register: webpage1
+
   - name: check output
     debug:
-      var: webpage
+      var: 
+        - webpage
+        - webpage1
 
   - name: Fail if 'Ansible has done its job' is not in the page content
     fail:
