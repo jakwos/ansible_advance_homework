@@ -9,16 +9,9 @@
     register: webpage
     ignore_errors: yes
 
-  - name: Curl website
-    command: curl "http://frontend1.{{ ANSIBLE_ADVANCE_GUID }}.example.opentlc.com"
-    register: webpage1
-
-  - name: check output
+  - name: Show page content
     debug:
-      var: item
-    with_items:
-        - "{{ webpage }}"
-        - "{{ webpage1 }}"
+      var: webpage.content
 
   - name: Fail if 'Ansible has done its job' is not in the page content
     fail:
