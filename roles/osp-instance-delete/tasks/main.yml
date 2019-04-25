@@ -3,7 +3,6 @@
   - name: Fetch Instance Info
     os_server_facts:
       cloud: ospcloud
-     # server: 'frontend'
     register: openstack_info
 
   - name: Show found servers
@@ -20,4 +19,6 @@
       delete_fip: true
       name: "{{ item.name }}"
     with_items: "{{ openstack_info.ansible_facts.openstack_servers }}"
+    loop_control:
+      label: "{{ item.name }}"
    

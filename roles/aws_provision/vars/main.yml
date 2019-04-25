@@ -1,7 +1,7 @@
 ---
 # vars file for aws_provision
 param_user: jakub.wosko-atos.net
-workstation_IP: 192.168.0.5
+param_repo_base: http://www.opentlc.com/download/ansible_bootcamp
 param_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           63326236613830383362663939303064366561663736613531653166303665333566376130643137
